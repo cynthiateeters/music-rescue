@@ -88,9 +88,24 @@ el.sample.addEventListener("change", async () => {
   el.file.value = "";
   chosen = null;
   updateRunButton();
-  if (!s) return;
-  const res = await fetch(`/samples/${s.file}`);
-  const blob = await res.blob();
+  if (!s) {
+    el.progress.textContent = "";
+    return;
+  }
+  // The Read button stays disabled until the picture arrives, so say why.
+  el.progress.textContent = "Loading sample…";
+  let blob;
+  try {
+    const res = await fetch(`/samples/${s.file}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    blob = await res.blob();
+  } catch (err) {
+    el.progress.textContent = `Couldn't load the sample: ${err.message}`;
+    return;
+  }
+  // Another sample may have been chosen while this one loaded.
+  if (el.sample.value !== s.file) return;
+  el.progress.textContent = "";
   const stem = s.file.replace(/\.[^.]+$/, "");
   chosen = {
     blob,
@@ -104,6 +119,7 @@ el.sample.addEventListener("change", async () => {
 el.file.addEventListener("change", () => {
   const f = el.file.files[0];
   el.sample.value = "";
+  el.progress.textContent = "";
   chosen = f ? { blob: f, name: f.name.replace(/\.[^.]+$/, ""), expectedUrl: null } : null;
   if (f) showPreview(f, f.name);
   updateRunButton();
