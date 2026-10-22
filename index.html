@@ -10,32 +10,26 @@
     <header class="site-header">
       <p class="site-name">Music Rescue</p>
       <div class="header-actions">
-        <p class="header-tag">Prototype</p>
+        <p class="header-tag">Proof of concept</p>
         <a href="https://github.com/cynthiateeters/music-rescue">Source code</a>
       </div>
     </header>
 
     <main>
       <section class="start" aria-labelledby="start-heading">
-        <h1 id="start-heading">Music Rescue: turn a page of sheet music into an editable score</h1>
+        <h1 id="start-heading">Music Rescue: from a picture of sheet music to an editable score</h1>
         <p>
-          Choose a picture of one page of sheet music. Music Rescue reads the notes and gives you a MusicXML file you can
-          open in MuseScore, Flat or Noteflight, and shows the result as notation beside the original so you can check it.
+          Choose a page below. Music Rescue reads the picture in this browser tab, turns it into a MusicXML file you can
+          open in MuseScore, Flat or Noteflight, and draws the result beside the original so you can compare them.
         </p>
-        <p class="note">
-          Your picture stays on your computer. The reading happens in this browser tab, and nothing is uploaded. It's built
-          for one instrument per page, a melody or a piano part. In testing, pages with several instruments came out as
-          a single line.
-        </p>
+        <p class="note">This demo shows pages Music Rescue handles well today: a melody or a piano part.</p>
 
         <div class="panel">
-          <label for="sample">Try a sample</label>
+          <label for="sample">Choose a page</label>
           <select id="sample">
-            <option value="">Choose a sample…</option>
+            <option value="">Choose a page…</option>
           </select>
-          <p class="or">or</p>
-          <label for="file">Use your own picture</label>
-          <input id="file" type="file" accept="image/*" />
+          <p class="hint">The first page takes longer while the reading engine loads, up to about 190 MB.</p>
           <div class="actions">
             <button id="run" type="button" class="primary" disabled>Read the page</button>
             <button id="cancel" type="button" class="quiet" disabled>Cancel</button>

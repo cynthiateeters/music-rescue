@@ -1,0 +1,27 @@
+# Music Rescue proof of concept. The site is built locally (pnpm build, with the models in
+# public/models/) and the dist folder is deployed as is, so Netlify never downloads the
+# 244 MB of models during a build.
+[build]
+  publish = "dist"
+
+# The security policy tested under vite preview (vite.config.js, MUSIC_POLICY): Deck Rescue's
+# policy plus 'wasm-unsafe-eval' and 'unsafe-eval', which homr-web needs. The two
+# Cross-Origin headers let WebAssembly use threads. Keep this in sync with vite.config.js and
+# public/_headers, which carries the same headers for a drag-and-drop deploy of dist.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; img-src 'self' blob:; worker-src 'self'; style-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Each model file sits under its own SHA-256, so its contents never change at that path.
+# Caching it for a year spares returning visitors the download.
+[[headers]]
+  for = "/models/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

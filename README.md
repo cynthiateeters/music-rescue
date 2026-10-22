@@ -4,6 +4,8 @@ Turn a picture of one page of sheet music into a MusicXML file you can edit, rig
 
 It's a prototype. It reads single-instrument pages (a melody or a piano part) well. In testing, pages with several instruments came out as a single line.
 
+This is the `poc` branch: a proof-of-concept demo site. It offers only the four sample pages that read well, and it has no file upload. `main` keeps the full prototype.
+
 ## Beginner's guide
 
 ### What you need
@@ -22,7 +24,7 @@ It's a prototype. It reads single-instrument pages (a melody or a piano part) we
 
 ### Use it
 
-1. Choose a sample, or pick your own picture of one page.
+1. Choose one of the sample pages.
 2. Choose **Read the page**. The first page takes longer while the models load.
 3. Check the notation against the original, then choose **Download MusicXML** and open the file in MuseScore or another notation program to fix what it got wrong.
 
@@ -31,8 +33,14 @@ It's a prototype. It reads single-instrument pages (a melody or a piano part) we
 - `index.html`, `src/main.js`, `src/style.css`: the page
 - `vite.config.js`: the dev server, with the headers WebAssembly threads need. `pnpm build` then `pnpm preview` serves the built page under Deck Rescue's security policy, plus the two script permissions homr-web needs (`'wasm-unsafe-eval'` and `'unsafe-eval'`), to test it the way it would run on Deck Rescue's site.
 - `scripts/fetch-models.mjs`: downloads and verifies homr's models into `public/models/`
-- `samples/`: test pages, with their sources and rights in `samples/SOURCES.md`
+- `public/samples/`: the four pages the demo offers, copied into the build
+- `samples/`: the pages left out of the demo, and `samples/SOURCES.md`, the sources and rights for all of them
 - `pnpm-workspace.yaml`: skips an optional native package OpenSheetMusicDisplay doesn't need in the browser, and blocks an install script
+- `netlify.toml` and `public/_headers`: the same security and cross-origin headers as `pnpm preview`, for Netlify. `_headers` covers a drag-and-drop deploy, where Netlify ignores `netlify.toml`.
+
+### Deploy the demo
+
+The site is built on your machine, because the models aren't in the repo. Fetch the models, run `pnpm build`, then deploy the `dist` folder: either drag it onto Netlify's deploy page, or run `netlify deploy --prod --dir=dist` from this folder. A first visit downloads the reading engine, up to about 190 MB.
 
 ## Contributing
 

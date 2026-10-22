@@ -2,6 +2,8 @@
 
 Downloaded 2026-10-22 for local testing of homr-web. Rights are as stated by each source on that date.
 
+On the `poc` branch, the pages the demo offers live in `public/samples/` so they ship with the site: The Kesh, Grand Staff Study and Chord Study (each with its `.expected.musicxml`), and The Star-Spangled Banner. The Bazzini and Bach scans stay here, out of the build, because they came out wrong. Their entries below still describe them.
+
 ## Baselines with expected output
 
 These three come from the homr-web repo. Each has a `.expected.musicxml` file, which is what homr 0.7.0 writes for that page. If the prototype's output matches it, the prototype is wired up correctly.

@@ -1,20 +1,19 @@
 import { createRecognizer } from "homr-web";
 import { OpenSheetMusicDisplay } from "opensheetmusicdisplay";
 
-// Files in samples/. A sample with an .expected.musicxml beside it is one of
-// homr-web's own test pages, so its output can be checked against homr's.
+// The proof-of-concept pages, served from public/samples/: the four pages Music Rescue read
+// well in testing (REA wiki, reports/homr-web-evaluation.md). A sample with an
+// .expected.musicxml beside it is one of homr-web's own test pages, so its output can be
+// checked against homr's.
 const SAMPLES = [
-  { file: "the-kesh-300dpi.png", label: "The Kesh (melody, baseline)", expected: true },
-  { file: "grand-staff-300dpi.png", label: "Grand Staff Study (piano, baseline)", expected: true },
+  { file: "the-kesh-300dpi.png", label: "The Kesh (Irish jig, melody)", expected: true },
+  { file: "grand-staff-300dpi.png", label: "Grand Staff Study (piano)", expected: true },
   {
     file: "chord-study-300dpi.png",
-    label: "Chord Study (chord symbols, baseline)",
+    label: "Chord Study (melody with chord symbols)",
     expected: true,
   },
-  { file: "bazzini-ronde-des-lutins-p1.png", label: "Bazzini, La Ronde des Lutins (scan)" },
-  { file: "bach-bwv1-bga-1851-p1.jpg", label: "Bach, BWV 1, 1851 edition (low-res scan)" },
-  { file: "star-spangled-banner-lyrics.png", label: "Star-Spangled Banner with lyrics (small)" },
-  { file: "photo-music-stand-usaf-peru.jpg", label: "Saxophone part on a stand (photo)" },
+  { file: "star-spangled-banner-lyrics.png", label: "The Star-Spangled Banner (piano)" },
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -23,7 +22,6 @@ const el = {
   backend: $("engine-backend"),
   isolated: $("engine-isolated"),
   sample: $("sample"),
-  file: $("file"),
   preview: $("preview"),
   previewImg: $("preview-img"),
   previewCaption: $("preview-caption"),
@@ -85,7 +83,6 @@ function showPreview(blob, caption) {
 
 el.sample.addEventListener("change", async () => {
   const s = SAMPLES.find((x) => x.file === el.sample.value);
-  el.file.value = "";
   chosen = null;
   updateRunButton();
   if (!s) {
@@ -113,15 +110,6 @@ el.sample.addEventListener("change", async () => {
     expectedUrl: s.expected ? `/samples/${stem}.expected.musicxml` : null,
   };
   showPreview(blob, s.label);
-  updateRunButton();
-});
-
-el.file.addEventListener("change", () => {
-  const f = el.file.files[0];
-  el.sample.value = "";
-  el.progress.textContent = "";
-  chosen = f ? { blob: f, name: f.name.replace(/\.[^.]+$/, ""), expectedUrl: null } : null;
-  if (f) showPreview(f, f.name);
   updateRunButton();
 });
 

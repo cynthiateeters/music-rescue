@@ -10,6 +10,9 @@ samples/photo-music-stand-usaf-peru.jpg
 # Build output
 dist/
 
+# Netlify's local link state, written when the folder is linked to a site
+.netlify/
+
 # OS and editor files
 .DS_Store
 .vscode/
