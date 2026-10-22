@@ -19,9 +19,11 @@
     Referrer-Policy = "no-referrer"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-# Each model file sits under its own SHA-256, so its contents never change at that path.
-# Caching it for a year spares returning visitors the download.
+# Netlify sends this header on a 404 too, so a long cache would keep a missing model broken
+# in a visitor's browser long after a fixed deploy. An hour caps that, and after it the browser
+# rechecks the ETag, which costs a quick 304, not a fresh download. homr-web also keeps the
+# models in its own Cache Storage, so returning visitors rarely ask at all.
 [[headers]]
   for = "/models/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=3600, must-revalidate"
