@@ -36,7 +36,7 @@ It's a prototype. It reads single-instrument pages (a melody or a piano part) we
 
 ## Contributing
 
-This is a personal project in early development. If you've been given access:
+This is a personal project in early development. Issues and pull requests are welcome. If you send one:
 
 - Keep dependencies pinned to exact versions, and ask before adding one.
 - Open a pull request rather than pushing to `main`.
@@ -46,7 +46,7 @@ This is a personal project in early development. If you've been given access:
 
 Copyright (c) 2026 Cynthia Teeters.
 
-Music Rescue is licensed under the GNU Affero General Public License version 3 (AGPL-3.0). See `LICENSE`. It has to be: it ships homr-web, which is AGPL-3.0, to the browser. Anyone who uses a deployed copy is entitled to its source.
+Music Rescue is licensed under the GNU Affero General Public License version 3 (AGPL-3.0). See `LICENSE`. It has to be: it ships homr-web, which is AGPL-3.0, to the browser. Anyone who uses a deployed copy is entitled to its source. This public repo is that source, and the page links to it in its header and footer. Music Rescue is planned to run as a page at `/music` on the Deck Rescue site, which stays a separate, MIT-licensed project.
 
 Third-party parts keep their own licenses:
 
