@@ -29,7 +29,7 @@ It's a prototype. It reads single-instrument pages (a melody or a piano part) we
 ### How it's organized
 
 - `index.html`, `src/main.js`, `src/style.css`: the page
-- `vite.config.js`: the dev server, with the headers WebAssembly threads need
+- `vite.config.js`: the dev server, with the headers WebAssembly threads need. `pnpm build` then `pnpm preview` serves the built page under Deck Rescue's security policy, plus the two script permissions homr-web needs (`'wasm-unsafe-eval'` and `'unsafe-eval'`), to test it the way it would run on Deck Rescue's site.
 - `scripts/fetch-models.mjs`: downloads and verifies homr's models into `public/models/`
 - `samples/`: test pages, with their sources and rights in `samples/SOURCES.md`
 - `pnpm-workspace.yaml`: skips an optional native package OpenSheetMusicDisplay doesn't need in the browser, and blocks an install script

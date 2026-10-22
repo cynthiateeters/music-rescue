@@ -6,7 +6,9 @@
   "license": "AGPL-3.0-only",
   "description": "Turn a picture of one page of sheet music into MusicXML in the browser, with homr-web, and show it as notation",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "homr-web": "0.5.1",
