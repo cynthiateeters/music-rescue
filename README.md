@@ -1,0 +1,56 @@
+# Music Rescue
+
+Turn a picture of one page of sheet music into a MusicXML file you can edit, right in the browser. Music Rescue reads the page with [homr-web](https://github.com/jymen/homr-web), a browser port of the [homr](https://github.com/liebharc/homr) optical music recognition engine, and draws the result as notation with [OpenSheetMusicDisplay](https://github.com/opensheetmusicdisplay/opensheetmusicdisplay) beside the original so you can check it.
+
+It's a prototype. It reads single-instrument pages (a melody or a piano part) well. In testing, pages with several instruments came out as a single line.
+
+## Beginner's guide
+
+### What you need
+
+- Node.js 22 or newer
+- pnpm
+- Chrome or Edge for the fastest reading (WebGPU). Other browsers fall back to WebAssembly, which is slower.
+
+### Set it up
+
+1. Clone the repo and open its folder.
+2. Install the packages: `pnpm install`
+3. Download homr's models (about 244 MB, checked against their published hashes): `node scripts/fetch-models.mjs`
+4. Start the page: `pnpm dev`
+5. Open the address it prints, usually http://localhost:5173/
+
+### Use it
+
+1. Choose a sample, or pick your own picture of one page.
+2. Choose **Read the page**. The first page takes longer while the models load.
+3. Check the notation against the original, then choose **Download MusicXML** and open the file in MuseScore or another notation program to fix what it got wrong.
+
+### How it's organized
+
+- `index.html`, `src/main.js`, `src/style.css`: the page
+- `vite.config.js`: the dev server, with the headers WebAssembly threads need
+- `scripts/fetch-models.mjs`: downloads and verifies homr's models into `public/models/`
+- `samples/`: test pages, with their sources and rights in `samples/SOURCES.md`
+- `pnpm-workspace.yaml`: skips an optional native package OpenSheetMusicDisplay doesn't need in the browser, and blocks an install script
+
+## Contributing
+
+This is a personal project in early development. If you've been given access:
+
+- Keep dependencies pinned to exact versions, and ask before adding one.
+- Open a pull request rather than pushing to `main`.
+- Never commit `public/models/` or copyrighted sample images. `.gitignore` already excludes them.
+
+## License
+
+Copyright (c) 2026 Cynthia Teeters.
+
+Music Rescue is licensed under the GNU Affero General Public License version 3 (AGPL-3.0). See `LICENSE`. It has to be: it ships homr-web, which is AGPL-3.0, to the browser. Anyone who uses a deployed copy is entitled to its source.
+
+Third-party parts keep their own licenses:
+
+- homr-web and homr: AGPL-3.0. homr's license FAQ notes that its model weights were trained partly on data marked for non-commercial use, which is an open legal question for commercial use.
+- OpenSheetMusicDisplay: BSD-3-Clause
+- The OCR models: Apache-2.0
+- The sample pages: see `samples/SOURCES.md`

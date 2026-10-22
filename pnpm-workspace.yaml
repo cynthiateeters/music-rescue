@@ -1,0 +1,10 @@
+# gl is an optional dependency of opensheetmusicdisplay, used only for
+# rendering in Node. The browser doesn't need it, and it brings a native build
+# (prebuild-install or node-gyp) plus a tree of build tools. Skip it.
+ignoredOptionalDependencies:
+  - gl
+
+# protobufjs's postinstall only prints a version warning. Deny it explicitly,
+# so pnpm stops asking and `pnpm dev` can start.
+allowBuilds:
+  protobufjs: false

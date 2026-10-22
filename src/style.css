@@ -1,0 +1,291 @@
+/* Colors, type and controls follow Deck Rescue (deck-rescue/src/style.css), so the Rescue apps look alike. */
+:root {
+  color-scheme: light;
+  --ink: hsl(220, 20%, 16%);
+  --ink-soft: hsl(220, 12%, 38%);
+  --ground: hsl(40, 30%, 98%);
+  --panel: hsl(0, 0%, 100%);
+  --line: hsl(220, 14%, 86%);
+  --accent: hsl(212, 80%, 36%);
+  --accent-ink: hsl(0, 0%, 100%);
+  --accent-soft: hsl(212, 80%, 95%);
+  --warn: hsl(28, 90%, 32%);
+  --warn-soft: hsl(38, 95%, 93%);
+  --ok: hsl(145, 55%, 28%);
+  --focus: hsl(212, 90%, 45%);
+  --radius: 0.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 1.125rem/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* A class that sets display would otherwise override the hidden attribute. */
+[hidden] {
+  display: none !important;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.site-name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.header-tag {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+main {
+  padding-inline: 1rem;
+  padding-block: 1.5rem 3rem;
+}
+
+/* ---------- start ---------- */
+
+.start {
+  max-width: 44rem;
+  margin: 2rem auto;
+}
+
+.note {
+  max-width: 44rem;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  background: var(--warn-soft);
+}
+
+.panel {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+select,
+input[type="file"] {
+  max-width: 100%;
+  font: inherit;
+}
+
+select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid hsl(220, 12%, 60%);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.or {
+  margin: 0.75rem 0;
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+button.quiet {
+  background: transparent;
+}
+
+.progress {
+  min-height: 1.6em;
+  margin: 0.75rem 0 0;
+  color: var(--ink-soft);
+}
+
+.hint {
+  margin: 0 0 0.5rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+.hint:empty {
+  display: none;
+}
+
+/* ---------- result ---------- */
+
+.work {
+  max-width: 78rem;
+  margin: 0 auto;
+}
+
+.result {
+  max-width: 44rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.result h2 {
+  margin-top: 0;
+}
+
+.result button {
+  margin-top: 1rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+}
+
+.facts dt {
+  color: var(--ink-soft);
+}
+
+.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* The original and the notation side by side, stacked on a narrow screen. */
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 60rem) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.column {
+  margin: 0;
+  min-width: 0;
+}
+
+.column h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.frame {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  overflow: auto;
+}
+
+.frame img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption {
+  margin-top: 0.25rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+details {
+  max-width: 78rem;
+  margin-top: 1rem;
+}
+
+summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+pre {
+  max-height: 24rem;
+  overflow: auto;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  font: 1rem/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- engine ---------- */
+
+.engine {
+  max-width: 44rem;
+  margin: 3rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 1rem;
+}
+
+.engine h2 {
+  margin-top: 0;
+  font-size: 1.125rem;
+}

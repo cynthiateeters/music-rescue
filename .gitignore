@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# homr's ONNX models (244 MB). Rebuild with: node scripts/fetch-models.mjs
+public/models/
+
+# A photo of a copyrighted arrangement, kept for local testing only (see samples/SOURCES.md)
+samples/photo-music-stand-usaf-peru.jpg
+
+# Build output
+dist/
+
+# OS and editor files
+.DS_Store
+.vscode/
+*.swp

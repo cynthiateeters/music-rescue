@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Music Rescue</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="site-name">Music Rescue</p>
+      <p class="header-tag">Prototype</p>
+    </header>
+
+    <main>
+      <section class="start" aria-labelledby="start-heading">
+        <h1 id="start-heading">Music Rescue: turn a page of sheet music into an editable score</h1>
+        <p>
+          Choose a picture of one page of sheet music. Music Rescue reads the notes and gives you a MusicXML file you can
+          open in MuseScore, Flat or Noteflight, and shows the result as notation beside the original so you can check it.
+        </p>
+        <p class="note">
+          Your picture stays on your computer. The reading happens in this browser tab, and nothing is uploaded. It's built
+          for one instrument per page, a melody or a piano part. In testing, pages with several instruments came out as
+          a single line.
+        </p>
+
+        <div class="panel">
+          <label for="sample">Try a sample</label>
+          <select id="sample">
+            <option value="">Choose a sample…</option>
+          </select>
+          <p class="or">or</p>
+          <label for="file">Use your own picture</label>
+          <input id="file" type="file" accept="image/*" />
+          <div class="actions">
+            <button id="run" type="button" class="primary" disabled>Read the page</button>
+            <button id="cancel" type="button" class="quiet" disabled>Cancel</button>
+          </div>
+          <p id="progress" class="progress" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="work" aria-label="Result">
+        <div id="result" class="result" hidden>
+          <h2 id="result-heading">Result</h2>
+          <dl class="facts">
+            <dt>Outcome</dt>
+            <dd id="result-outcome"></dd>
+            <dt>Time</dt>
+            <dd id="result-time"></dd>
+            <dt>Staves found</dt>
+            <dd id="result-staves"></dd>
+            <dt>Chord and title text</dt>
+            <dd id="result-texts"></dd>
+            <dt>Compared with homr's expected output</dt>
+            <dd id="result-compare"></dd>
+          </dl>
+          <button id="download" type="button" class="primary" hidden>Download MusicXML</button>
+        </div>
+
+        <div class="columns">
+          <figure id="preview" class="column" hidden>
+            <h2>Original page</h2>
+            <div class="frame">
+              <img id="preview-img" alt="" />
+            </div>
+            <figcaption id="preview-caption"></figcaption>
+          </figure>
+
+          <section id="notation" class="column" aria-labelledby="notation-heading" hidden>
+            <h2 id="notation-heading">Notation</h2>
+            <p id="notation-status" class="hint" role="status" aria-live="polite"></p>
+            <div id="score" class="frame"></div>
+          </section>
+        </div>
+
+        <details id="xml-details" hidden>
+          <summary>MusicXML</summary>
+          <pre id="xml"></pre>
+        </details>
+        <details id="log-details" hidden>
+          <summary>Engine log</summary>
+          <pre id="log"></pre>
+        </details>
+      </section>
+
+      <section class="engine" aria-labelledby="engine-heading">
+        <h2 id="engine-heading">Engine</h2>
+        <dl class="facts">
+          <dt>Status</dt>
+          <dd id="engine-status">Starting…</dd>
+          <dt>Backend</dt>
+          <dd id="engine-backend">–</dd>
+          <dt>Cross-origin isolated</dt>
+          <dd id="engine-isolated">–</dd>
+        </dl>
+      </section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "music-rescue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "AGPL-3.0-only",
+  "description": "Turn a picture of one page of sheet music into MusicXML in the browser, with homr-web, and show it as notation",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "homr-web": "0.5.1",
+    "opensheetmusicdisplay": "2.2.0"
+  },
+  "devDependencies": {
+    "vite": "8.3.4"
+  }
+}
