@@ -54,7 +54,7 @@ This is a personal project in early development. Issues and pull requests are we
 
 Copyright (c) 2026 Cynthia Teeters.
 
-Music Rescue is licensed under the GNU Affero General Public License version 3 (AGPL-3.0). See `LICENSE`. It has to be: it ships homr-web, which is AGPL-3.0, to the browser. Anyone who uses a deployed copy is entitled to its source. This public repo is that source, and the page links to it in its header and footer. Music Rescue is planned to run as a page at `/music` on the Deck Rescue site, which stays a separate, MIT-licensed project.
+Music Rescue is licensed under the GNU Affero General Public License version 3 (AGPL-3.0). See `LICENSE`. It has to be: it ships homr-web, which is AGPL-3.0, to the browser. Anyone who uses a deployed copy is entitled to its source. This public repo is that source, and the page links to it in its header and footer. The demo built from this branch links to the `poc` branch, since that's the code it runs. Music Rescue is planned to run as a page at `/music` on the Deck Rescue site, which stays a separate, MIT-licensed project.
 
 Third-party parts keep their own licenses:
 
