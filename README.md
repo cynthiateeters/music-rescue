@@ -12,7 +12,8 @@ This is the `poc` branch: a proof-of-concept demo site. It offers only the four 
 
 - Node.js 22 or newer
 - pnpm
-- Chrome or Edge for the fastest reading (WebGPU). Other browsers fall back to WebAssembly, which is slower.
+- Chrome or Edge on a laptop or desktop for the fastest reading (WebGPU). Other browsers fall back to WebAssembly, which is slower.
+- Not a phone, for now. On an iPhone, in both Safari and Chrome, the engine starts, then rejects the first page with "recognize while the worker is idle", so reading fails. Desktop Chrome doesn't do this. The cause isn't known yet. The page's note steers visitors to a laptop or desktop browser.
 
 ### Set it up
 

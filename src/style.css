@@ -116,6 +116,14 @@ main {
   background: var(--warn-soft);
 }
 
+.note p {
+  margin: 0;
+}
+
+.note p + p {
+  margin-top: 0.5rem;
+}
+
 .panel {
   margin-top: 1.5rem;
   padding: 1.25rem;
