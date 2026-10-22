@@ -40,7 +40,7 @@ This is the `poc` branch: a proof-of-concept demo site. It offers only the four 
 
 ### Deploy the demo
 
-The site is built on your machine, because the models aren't in the repo. Fetch the models, run `pnpm build`, then deploy the `dist` folder: either drag it onto Netlify's deploy page, or run `netlify deploy --prod --dir=dist` from this folder. A first visit downloads the reading engine, up to about 190 MB.
+The demo runs at https://music-rescue-poc.netlify.app/, a Netlify site linked to this repo's `poc` branch. The models aren't in the repo, so `netlify.toml` has Netlify's build fetch them first, then run `pnpm build`. Every push to `poc` redeploys. To deploy by hand instead, fetch the models, run `pnpm build`, then drag `dist` onto Netlify's deploy page or run `netlify deploy --prod --dir=dist`. A first visit downloads the reading engine, up to about 190 MB.
 
 ## Contributing
 

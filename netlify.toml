@@ -1,7 +1,7 @@
-# Music Rescue proof of concept. The site is built locally (pnpm build, with the models in
-# public/models/) and the dist folder is deployed as is, so Netlify never downloads the
-# 244 MB of models during a build.
+# Music Rescue proof of concept. The models aren't in the repo, so a build linked to GitHub
+# downloads them first (about 244 MB, checked against homr-web's pinned hashes), then builds.
 [build]
+  command = "node scripts/fetch-models.mjs && pnpm build"
   publish = "dist"
 
 # The security policy tested under vite preview (vite.config.js, MUSIC_POLICY): Deck Rescue's
