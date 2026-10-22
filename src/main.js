@@ -135,6 +135,7 @@ el.run.addEventListener("click", async () => {
   updateRunButton();
   el.result.hidden = true;
   el.notation.hidden = true;
+  notationDrawn = false;
   osmd?.clear();
   el.progress.textContent = "Preparing the image…";
 
@@ -164,7 +165,7 @@ async function showResult(result) {
   if (!result.ok) {
     el.outcome.textContent = `Failed: ${result.error}`;
     el.staves.textContent = "–";
-    el.texts.textContent = "–";
+    el.texts.replaceChildren("–");
     el.compare.textContent = "–";
     el.download.hidden = true;
     el.xmlDetails.hidden = true;
@@ -174,7 +175,7 @@ async function showResult(result) {
   lastXml = result.musicXml;
   el.outcome.textContent = "Read successfully";
   el.staves.textContent = String(result.staves.length);
-  el.texts.textContent = result.texts.length ? result.texts.map((t) => t.text).join(", ") : "none";
+  showTexts(result.texts.map((t) => t.text));
   el.xml.textContent = lastXml;
   el.xmlDetails.hidden = false;
   el.download.hidden = false;
@@ -191,16 +192,55 @@ async function showResult(result) {
   }
 }
 
+// A page with lyrics can return dozens of text pieces. Show the first few, and
+// fold the rest away so the Result box stays short on a phone.
+const TEXTS_SHOWN = 6;
+
+function showTexts(texts) {
+  el.texts.replaceChildren();
+  if (!texts.length) {
+    el.texts.textContent = "none";
+    return;
+  }
+  if (texts.length <= TEXTS_SHOWN) {
+    el.texts.textContent = texts.join(", ");
+    return;
+  }
+  const details = document.createElement("details");
+  details.className = "texts-more";
+  const summary = document.createElement("summary");
+  summary.textContent = `${texts.slice(0, TEXTS_SHOWN).join(", ")}, and ${texts.length - TEXTS_SHOWN} more`;
+  const all = document.createElement("p");
+  all.textContent = texts.join(", ");
+  details.append(summary, all);
+  el.texts.append(details);
+}
+
+// On a narrow screen, draw the notation smaller so each line holds more than
+// one or two measures. Matches the 36rem breakpoint in style.css.
+const narrow = matchMedia("(max-width: 36rem)");
+const notationZoom = () => (narrow.matches ? 0.65 : 1);
+let notationDrawn = false;
+
+narrow.addEventListener("change", () => {
+  if (!notationDrawn) return;
+  osmd.zoom = notationZoom();
+  osmd.render();
+});
+
 // Draw the MusicXML as notation. The container must be visible first, because
 // OSMD lays the score out to the container's width. A file OSMD can't draw
 // (likely with messy scan output) shows a message instead of breaking the page.
 async function renderNotation(xml) {
   el.notation.hidden = false;
   el.notationStatus.textContent = "Drawing the notation…";
+  notationDrawn = false;
   try {
     osmd ??= new OpenSheetMusicDisplay(el.score, { autoResize: true, backend: "svg" });
     await osmd.load(xml);
+    osmd.zoom = notationZoom();
     osmd.render();
+    notationDrawn = true;
     el.notationStatus.textContent = "";
   } catch (err) {
     osmd?.clear();

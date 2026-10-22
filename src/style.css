@@ -43,6 +43,11 @@ h3 {
   line-height: 1.25;
 }
 
+/* Smaller on a phone, so the heading wraps to two or three lines, not four. */
+h1 {
+  font-size: clamp(1.625rem, 1.1rem + 2.5vw, 2.25rem);
+}
+
 .site-header {
   display: flex;
   flex-wrap: wrap;
@@ -70,6 +75,13 @@ h3 {
   margin: 0;
   color: var(--ink-soft);
   font-size: 1rem;
+}
+
+/* A 44px tap target for the header link. */
+.header-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
 }
 
 a {
@@ -230,6 +242,28 @@ button.quiet {
   overflow-wrap: anywhere;
 }
 
+/* On a phone the labels are too wide for a column of their own, so each label sits above its value. */
+@media (max-width: 36rem) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .facts dd {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* A long list of chord and title text, folded so the Result box stays short. */
+.texts-more summary {
+  padding-block: 0;
+  font-weight: 400;
+}
+
+.texts-more p {
+  margin: 0.25rem 0 0;
+}
+
 /* The original and the notation side by side, stacked on a narrow screen. */
 .columns {
   display: grid;
@@ -278,6 +312,7 @@ details {
 }
 
 summary {
+  padding-block: 0.6rem;
   font-weight: 600;
   cursor: pointer;
 }
